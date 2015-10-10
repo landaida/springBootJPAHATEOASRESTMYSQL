@@ -23,32 +23,32 @@ public class Publicacion implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
-	@OneToOne
+
+	@OneToOne(optional = true)
 	@JoinColumn(name = "ID_DEMANDA")
 	private Demanda demanda;
-	
-	@OneToOne
+
+	@OneToOne(optional = true)
 	@JoinColumn(name = "ID_OFERTA")
 	private Oferta oferta;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
-	
+
 	@Column
 	private Date fecha;
-	
-	@Column
+
+	@Column(length = 1, columnDefinition = "varchar(1) default 'A'")
 	private String activa;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_IMAGEN")
+	@JoinColumn(name = "ID_PUBLICACION")
 	private List<Imagen> listImagen;
 
-/*	@OneToOne
-	@JoinColumn(name = "id")
-	private Compra compra;*/
+	@OneToMany
+	@JoinColumn(name = "ID_PUBLICACION")
+	private List<Operacion> listOperacion;
 
 	public Publicacion() {
 		super();
@@ -108,6 +108,14 @@ public class Publicacion implements Serializable {
 
 	public void setListImagen(List<Imagen> listImagen) {
 		this.listImagen = listImagen;
+	}
+
+	public List<Operacion> getListOperacion() {
+		return listOperacion;
+	}
+
+	public void setListOperacion(List<Operacion> listOperacion) {
+		this.listOperacion = listOperacion;
 	}
 
 	@Override

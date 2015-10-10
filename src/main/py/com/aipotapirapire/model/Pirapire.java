@@ -4,12 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
 public class Pirapire implements Serializable {
@@ -20,14 +22,17 @@ public class Pirapire implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name = "ID_USUARIO")
+	//@PrimaryKeyJoinColumn
+	@RestResource(exported = false)
 	private Usuario usuario;
 
-	@Column
-	private Double saldoAnterior;
-	@Column
-	private Double saldo;
+	@Column(columnDefinition="double default '0'", precision=10, scale=4)
+	private Double saldoAnterior = 0.0;
+	
+	@Column(columnDefinition="double default '0'", precision=10, scale=4)
+	private Double saldo = 0.0;
 
 	public Pirapire() {
 		super();
