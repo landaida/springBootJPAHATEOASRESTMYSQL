@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -53,6 +55,13 @@ public class Publicacion implements Serializable {
 	@JoinColumn(name = "ID_PUBLICACION")
 	private List<Operacion> listOperacion;
 
+	@ManyToMany
+	 @JoinTable(
+		      name="PUBLICACION_CATEGORIA",
+		      joinColumns={@JoinColumn(name="PUBLICACION_ID", referencedColumnName="ID")},
+		      inverseJoinColumns={@JoinColumn(name="CATEGORIA_ID", referencedColumnName="ID")})
+	private List<Categoria> listCategoria;
+	
 	public Publicacion() {
 		super();
 	}
@@ -119,6 +128,14 @@ public class Publicacion implements Serializable {
 
 	public void setListOperacion(List<Operacion> listOperacion) {
 		this.listOperacion = listOperacion;
+	}
+	
+	public List<Categoria> getListCategoria() {
+		return listCategoria;
+	}
+
+	public void setListCategoria(List<Categoria> listCategoria) {
+		this.listCategoria = listCategoria;
 	}
 
 	@Override
