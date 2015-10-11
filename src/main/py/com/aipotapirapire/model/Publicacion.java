@@ -37,7 +37,7 @@ public class Publicacion implements Serializable {
 	@RestResource(exported = false)
 	private Oferta oferta;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	@RestResource(exported = false)
 	private Usuario usuario;

@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ public class Operacion implements Serializable {
 
 	public static final String DEBITO = "D";
 	public static final String CREDITO = "C";
-	
+
 	private static final long serialVersionUID = -6843664038934841999L;
 
 	@Id
@@ -32,7 +31,7 @@ public class Operacion implements Serializable {
 	@Column
 	private Double valor;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "ID_PUBLICACION")
 	private Publicacion publicacion;
 

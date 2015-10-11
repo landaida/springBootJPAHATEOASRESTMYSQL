@@ -33,11 +33,11 @@ public class Demanda implements Serializable {
 	@JoinTable(name = "INTERESADOS", joinColumns = { @JoinColumn(name = "ID_DEMANDA") }, inverseJoinColumns = { @JoinColumn(name = "ID_USUARIO") })
 	private List<Usuario> interesados;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "ELEGIDO")
 	private Usuario elegido;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
 	@RestResource(exported = false)
 	private Usuario usuario;
@@ -46,6 +46,16 @@ public class Demanda implements Serializable {
 	@JoinColumn(name = "ID_PUBLICACION")
 	@RestResource(exported = false)
 	private Publicacion publicacion;
+
+	@ManyToOne
+	@JoinColumn(name = "calificacion_elegido")
+	@RestResource(exported = false)
+	private Calificacion calificacion_elegido;
+
+	@ManyToOne
+	@JoinColumn(name = "calificacion_usuario")
+	@RestResource(exported = false)
+	private Calificacion calificacion_usuario;
 
 	public Demanda() {
 		super();
@@ -97,6 +107,22 @@ public class Demanda implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Calificacion getCalificacion_elegido() {
+		return calificacion_elegido;
+	}
+
+	public void setCalificacion_elegido(Calificacion calificacion_elegido) {
+		this.calificacion_elegido = calificacion_elegido;
+	}
+
+	public Calificacion getCalificacion_usuario() {
+		return calificacion_usuario;
+	}
+
+	public void setCalificacion_usuario(Calificacion calificacion_usuario) {
+		this.calificacion_usuario = calificacion_usuario;
 	}
 
 	@Override

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -22,7 +21,7 @@ public class Usuario implements Serializable {
 	@Column
 	private String nombre;
 
-	@OneToOne(mappedBy="usuario")
+	@OneToOne(mappedBy = "usuario")
 	private Pirapire pirapire;
 
 	public Usuario() {

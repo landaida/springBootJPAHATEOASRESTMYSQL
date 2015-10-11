@@ -7,25 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
+import py.com.aipotapirapire.enums.CalificacionValores;
 
 @Entity
-public class Imagen implements Serializable {
-	private static final long serialVersionUID = -4538536962316923982L;
+public class Calificacion implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column
-	private byte[] imagen;
+	private CalificacionValores valor;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_PUBLICACION")
-	private Publicacion publicacion;
-
-	public Imagen() {
+	public Calificacion() {
 		super();
 	}
 
@@ -37,20 +34,12 @@ public class Imagen implements Serializable {
 		this.id = id;
 	}
 
-	public byte[] getImagen() {
-		return imagen;
+	public CalificacionValores getValor() {
+		return valor;
 	}
 
-	public void setImagen(byte[] imagen) {
-		this.imagen = imagen;
-	}
-
-	public Publicacion getPublicacion() {
-		return publicacion;
-	}
-
-	public void setPublicacion(Publicacion publicacion) {
-		this.publicacion = publicacion;
+	public void setValor(CalificacionValores valor) {
+		this.valor = valor;
 	}
 
 	@Override
@@ -69,7 +58,7 @@ public class Imagen implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Imagen other = (Imagen) obj;
+		Calificacion other = (Calificacion) obj;
 		if (id != other.id)
 			return false;
 		return true;

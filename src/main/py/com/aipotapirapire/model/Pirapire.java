@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.data.rest.core.annotation.RestResource;
 
@@ -24,14 +23,14 @@ public class Pirapire implements Serializable {
 
 	@OneToOne
 	@JoinColumn(name = "ID_USUARIO")
-	//@PrimaryKeyJoinColumn
+	// @PrimaryKeyJoinColumn
 	@RestResource(exported = false)
 	private Usuario usuario;
 
-	@Column(columnDefinition="double default '0'", precision=10, scale=4)
+	@Column(columnDefinition = "double default '0'", precision = 10, scale = 4)
 	private Double saldoAnterior = 0.0;
-	
-	@Column(columnDefinition="double default '0'", precision=10, scale=4)
+
+	@Column(columnDefinition = "double default '0'", precision = 10, scale = 4)
 	private Double saldo = 0.0;
 
 	public Pirapire() {
