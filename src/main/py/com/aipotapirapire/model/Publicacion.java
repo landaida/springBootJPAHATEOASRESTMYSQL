@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.data.rest.core.annotation.RestResource;
+
 @Entity
 public class Publicacion implements Serializable {
 
@@ -24,29 +27,29 @@ public class Publicacion implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@OneToOne(optional = true)
-	@JoinColumn(name = "ID_DEMANDA")
+	@OneToOne(optional = true, mappedBy = "publicacion", cascade = CascadeType.ALL)
+	@RestResource(exported = false)
 	private Demanda demanda;
 
-	@OneToOne(optional = true)
-	@JoinColumn(name = "ID_OFERTA")
+	@OneToOne(optional = true, mappedBy = "publicacion", cascade = CascadeType.ALL)
+	@RestResource(exported = false)
 	private Oferta oferta;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_USUARIO")
+	@RestResource(exported = false)
 	private Usuario usuario;
 
 	@Column
-	private Date fecha;
+	private Date fecha = new Date();
 
-	@Column(length = 1, columnDefinition = "varchar(1) default 'A'")
-	private String activa;
+	@Column(length = 1, columnDefinition = "varchar(1) default 'S'")
+	private String activa = "S";
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_PUBLICACION")
+	@OneToMany(mappedBy = "publicacion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Imagen> listImagen;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ID_PUBLICACION")
 	private List<Operacion> listOperacion;
 
