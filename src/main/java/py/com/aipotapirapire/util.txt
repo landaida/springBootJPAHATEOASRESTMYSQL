@@ -14,7 +14,14 @@ curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/pirapir
 
 curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/usuario -d "{\"nombre\" : \"Ariel\" }"
 
-curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/pirapire -d "{\"usuario\" : {\"id\" : \"1\" }}"
+
 curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/pirapire -d "{\"saldo\" : \"0\", \"saldo_anterior\" : \"0\", \"usuario\" : {\"id\" : \"1\" }}"
-curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/publicacion -d "{\"usuario\" : {\"id\" : \"1\" }, \"demanda\" : {\"id\" : \"1\" }, \"listImagen\" : [{}]}"
-curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/publicacion -d "{\"usuario\" : {\"id\" : \"1\" }, \"demanda\" : {\"descripcion\" : \"Necesito un profesor de ingles.\", \"usuario\" : {\"id\" : \"1\" }}}"
+
+
+curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/publicacion -d "{\"usuario\" : {\"id\" : \"1\" }}"
+
+curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/demanda -d "{\"descripcion\" : \"Necesito un profesor de ingles.\", \"usuario\" : {\"id\" : \"1\" }, \"publicacion\" : {\"id\" : \"1\" }}"
+
+:\Users\Ariel>curl -H "Content-Type:application/json" -i -X POST http://localhost:8080/api/publicacion -d "{\"usuario\" : {\"id\" : \"1\" }, \"demanda\" : {\"descripcion\" : \"Necesito un profesor de ingles.\", \"usuario\" : {\"id\" : \"1\" }}}"
+
+curl -H "Content-Type:application/json" -i "http://localhost:8080/usuario" 

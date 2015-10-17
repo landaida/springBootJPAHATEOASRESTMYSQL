@@ -1,41 +1,41 @@
 package py.com.aipotapirapire.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import org.springframework.data.rest.core.annotation.RestResource;
 
 @Entity
-public class Oferta implements Serializable {
+@Inheritance
+public class Operacion implements Serializable {
 
-	private static final long serialVersionUID = 9180456631851843863L;
+	private static final long serialVersionUID = -6843664038934841999L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column
-	private String descripcion;
+	private Date fecha;
+
+	@Column
+	private Double valor;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_USUARIO")
-	@RestResource(exported = false)
-	private Usuario usuario;
-
-	@OneToOne
 	@JoinColumn(name = "ID_PUBLICACION")
-	@RestResource(exported = false)
 	private Publicacion publicacion;
 
-	public Oferta() {
+	@Column(length = 1, columnDefinition = "varchar(1) COMMENT 'C=CREDIO, D=DEBITO'")
+	private String tipo;
+
+	public Operacion() {
 		super();
 	}
 
@@ -47,12 +47,36 @@ public class Oferta implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public Publicacion getPublicacion() {
+		return publicacion;
+	}
+
+	public void setPublicacion(Publicacion publicacion) {
+		this.publicacion = publicacion;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
@@ -71,7 +95,7 @@ public class Oferta implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Oferta other = (Oferta) obj;
+		Operacion other = (Operacion) obj;
 		if (id != other.id)
 			return false;
 		return true;

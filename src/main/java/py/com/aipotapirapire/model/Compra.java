@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 
+import py.com.aipotapirapire.enums.OperacionTipo;
+
 @Entity
 public class Compra extends Operacion implements Serializable {
 
@@ -11,7 +13,7 @@ public class Compra extends Operacion implements Serializable {
 
 	public Compra() {
 		super();
-		this.setTipo(DEBITO);
+		this.setTipo(OperacionTipo.DEBITO.getValue());
 	}
 
 	

@@ -1,32 +1,28 @@
 package py.com.aipotapirapire.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+/**
+ * @author Ariel
+ * 
+ */
 @Entity
-public class Usuario implements Serializable {
-
-	private static final long serialVersionUID = -1214029224587063928L;
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+public class ChildEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private long id;
-
 	@Column
-	private String nombre;
-
-	@OneToOne(mappedBy = "usuario")
-	private Pirapire pirapire;
-
-	public Usuario() {
-		super();
-	}
+	private String description;
+	@ManyToOne
+	private ParentEntity parent;
 
 	public long getId() {
 		return id;
@@ -36,20 +32,20 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public Pirapire getPirapire() {
-		return pirapire;
+	public ParentEntity getParent() {
+		return parent;
 	}
 
-	public void setPirapire(Pirapire pirapire) {
-		this.pirapire = pirapire;
+	public void setParent(ParentEntity parent) {
+		this.parent = parent;
 	}
 
 	@Override
@@ -68,7 +64,7 @@ public class Usuario implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Usuario other = (Usuario) obj;
+		ChildEntity other = (ChildEntity) obj;
 		if (id != other.id)
 			return false;
 		return true;

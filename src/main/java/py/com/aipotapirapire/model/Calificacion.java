@@ -10,7 +10,11 @@ import javax.persistence.Id;
 
 import py.com.aipotapirapire.enums.CalificacionValores;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Calificacion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
